@@ -1,0 +1,51 @@
+name: "manage"
+mode: "dev"
+port: 8081
+version: v0.1.0
+machine_id: 1
+start_time: "2022-10-06"
+
+auth:
+  jwt_expire: 336
+
+
+log:
+  level: "debug"
+  filename: "manage.log"
+  max_size: 200
+  max_age: 30
+  max_backups: 7
+
+mysql:
+  host: "8.134.222.37"
+  port: "3306"
+  user: "root"
+  password: "20011112"
+  dbname: "manage"
+  max_conn: 200
+  max_idle_conn: 50
+
+redis:
+  host: "8.134.222.37"
+  port: 6379
+  db: 0
+  password: "20011112"
+  pool_size: 100
+
+qiniu:
+  # Path 文件存储文件夹
+  path: 'image/'
+  # Prefix 自定义文件名前缀, 可以不写为空了
+  prefix: 'manage_'
+  # Bucket 存储桶名称
+  bucket: 'managea'
+  # Domain 访问域名
+  domain: 'http://rrhi8d4ep.hn-bkt.clouddn.com/'
+  # AccessKey 访问密钥 AccessKey
+  accessKey: 'mPHyPdQHvY54SC9BlEY5zOVfveJj_KyfEiSMg8SE'
+  # SecretKey 访问密钥 SecretKey
+  secretKey: '-7bmfBcHKXZJF2Zty5QMquMRORC-IjBP_0aW6FNs'
+  # UseHttps 是否使用https
+  useHttps: false
+  # UseCdnDomains 是否使用cdn域名
+  useCdnDomains: false
