@@ -1,11 +1,12 @@
 package model
 
 type Tag struct {
-	ID            int    `json:"id,string" db:"tag_id"`
-	ArticleNumber int    `json:"num,string" db:"article_number"`
-	Name          string `json:"name" db:"tag_name"`
-	Image         string `json:"image" db:"image"`
-	IsFollow      bool   `json:"isFollow"`
+	ID             int    `json:"id,string" db:"tag_id"`
+	ArticleNumber  int    `json:"num,string" db:"article_number"`
+	FollowerNumber int    `json:"f_num" db:"follower_number"`
+	Name           string `json:"name" db:"tag_name"`
+	Image          string `json:"image" db:"image"`
+	IsFollow       bool   `json:"isFollow"`
 }
 
 type TagSimple struct {

@@ -41,6 +41,27 @@ func GetAllTags(p *model.ParamTagList) (tagList []*model.Tag, total int, err err
 	return
 }
 
+func GetHotTags(p *model.ParamTagList) (tagList []*model.Tag, total int, err error) {
+	tagList, total, err = mysql.GetHotTags(p)
+	if err != nil {
+		zap.L().Error("mysql.GetAllTags failed",
+			zap.Int64("userID", p.CurrentUserID),
+			zap.Error(err))
+		return nil, 0, err
+	}
+	for _, tag := range tagList {
+		tag.IsFollow, err = mysql.IsFollowTag(p.CurrentUserID, tag.ID)
+		if err != nil {
+			zap.L().Error("mysql.IsFollowTag failed",
+				zap.Int64("userID", p.CurrentUserID),
+				zap.Int("tagID", tag.ID),
+				zap.Error(err))
+			continue
+		}
+	}
+	return
+}
+
 func GetSearchTags(p *model.ParamSearch) (tagList []*model.Tag, total int, err error) {
 	tagList, total, err = mysql.GetSearchTags(p)
 	if err != nil {

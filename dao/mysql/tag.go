@@ -87,6 +87,19 @@ func GetAllTags(p *model.ParamTagList) (tagList []*model.Tag, total int, err err
 	return
 }
 
+func GetHotTags(p *model.ParamTagList) (tagList []*model.Tag, total int, err error) {
+	sqlStr1 := `select tag_id,article_number,tag_name,image from tag order by article_number desc limit ?,?`
+	if err = db.Select(&tagList, sqlStr1, (p.Page-1)*p.Size, p.Size); err != nil {
+		if err == sql.ErrNoRows {
+			zap.L().Warn("there is no tag in db")
+			err = nil
+		}
+	}
+	sqlStr2 := `select count(*) from tag`
+	err = db.Get(&total, sqlStr2)
+	return
+}
+
 func GetFollowingTags(p *model.ParamTagList) (tagList []*model.Tag, total int, err error) {
 	tagNumList := make([]int, 0)
 	sqlStr1 := `select follow_tag_id from follow_tag where user_id = ?`
@@ -174,7 +187,7 @@ func GetTagIDsByArticleID(id int64) (tagIDs []int, err error) {
 }
 
 func GetSearchTags(p *model.ParamSearch) (tagList []*model.Tag, total int, err error) {
-	sqlStr1 := `select tag_id,article_number,tag_name,image from tag where tag_name like concat('%',?,'%') order by follower_number desc limit ?,?`
+	sqlStr1 := `select tag_id,article_number,follower_number,tag_name,image from tag where tag_name like concat('%',?,'%') order by follower_number desc limit ?,?`
 	if err = db.Select(&tagList, sqlStr1, p.Key, (p.Page-1)*p.Size, p.Size); err != nil {
 		if err == sql.ErrNoRows {
 			zap.L().Warn("there is no tag in db")

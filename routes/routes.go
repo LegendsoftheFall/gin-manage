@@ -22,6 +22,7 @@ func SetUp() *gin.Engine {
 		AllowCredentials: true,
 		MaxAge:           12 * time.Hour,
 	}))
+
 	defaultRoutesInit(r)
 	recommendRoutesInit(r)
 	exploreRoutesInit(r)

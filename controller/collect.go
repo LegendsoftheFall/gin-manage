@@ -25,7 +25,7 @@ func CollectHandler(c *gin.Context) {
 	ResponseSuccess(c, nil)
 }
 
-//BookMarkHandler 获取收藏文章列表请求的处理函数
+// BookMarkHandler 获取收藏文章列表请求的处理函数
 func BookMarkHandler(c *gin.Context) {
 	p := &model.ParamPage{
 		Page: 1,

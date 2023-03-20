@@ -9,6 +9,7 @@ import (
 func exploreRoutesInit(r *gin.Engine) {
 	exploreRoutes := r.Group("/explore")
 	{
+		exploreRoutes.GET("/hotTags", controller.HotTagsHandler)
 		exploreRoutes.GET("/tags", controller.TagsHandler)
 		exploreRoutes.GET("/followingTags", controller.FollowingTagsHandler)
 		exploreRoutes.GET("/followingUsers", controller.FollowingUsersHandler)
