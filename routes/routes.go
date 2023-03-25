@@ -28,6 +28,8 @@ func SetUp() *gin.Engine {
 	exploreRoutesInit(r)
 	tagRoutesInit(r)
 	apiRoutesInit(r)
+	adminRoutesInit(r)
+	adminApiRoutesInit(r)
 
 	return r
 }

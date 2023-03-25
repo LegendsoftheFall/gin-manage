@@ -31,7 +31,7 @@ func GenToken(userID int64, email string) (aToken, rToken string, err error) {
 		UserID: userID,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().
-				Add(time.Minute * 90).Unix(), // 过期时间
+				Add(time.Hour * 24).Unix(), // 过期时间
 			Issuer: "manage", // 签发人
 		},
 	}
@@ -63,7 +63,7 @@ func ParseToken(tokenString string) (*MyClaims, error) {
 	return nil, errors.New("invalid token")
 }
 
-//RefreshToken 刷新AccessToken
+// RefreshToken 刷新AccessToken
 func RefreshToken(aToken, rToken string) (newAToken, newRToken string, err error) {
 	//refresh token 无效直接返回
 	if _, err = jwt.Parse(rToken, func(token *jwt.Token) (i interface{}, err error) {

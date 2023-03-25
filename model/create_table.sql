@@ -25,6 +25,21 @@ alter table user add column `follower` int NOT NULL DEFAULT '0' after introducti
 alter table user add column `following` int NOT NULL DEFAULT '0' after follower;
 alter table user add column `github` varchar(64) COLLATE utf8mb4_general_ci DEFAULT '' after homepage;
 
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE `admin` (
+                        `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                        `admin_id` bigint(20) NOT NULL,
+                        `admin_name` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
+                        `password` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
+                        `email` varchar(64) COLLATE utf8mb4_general_ci NOT NULL ,
+                        `avatar` varchar(128) COLLATE utf8mb4_general_ci DEFAULT '',
+                        `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+                        `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                        PRIMARY KEY (`id`),
+                        UNIQUE KEY `idx_email` (`email`) USING BTREE,
+                        UNIQUE KEY `idx_user_id` (`admin_id`) USING BTREE
+)ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 # DROP TABLE IF EXISTS `tag`;
 CREATE TABLE `tag`(
                             `id` int(11) NOT NULL AUTO_INCREMENT,

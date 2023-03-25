@@ -11,8 +11,8 @@ const CtxUserIDKey = "userID"
 
 var ErrorUserNotLogin = errors.New("用户未登录")
 
-//getCurrentUserID 获取当前用户ID
-func getCurrentUserID(c *gin.Context) (UserID int64, err error) {
+// GetCurrentUserID 获取当前用户ID
+func GetCurrentUserID(c *gin.Context) (UserID int64, err error) {
 	uid, ok := c.Get(CtxUserIDKey)
 	if !ok {
 		err = ErrorUserNotLogin
@@ -26,8 +26,8 @@ func getCurrentUserID(c *gin.Context) (UserID int64, err error) {
 	return
 }
 
-// getPageInfo 获取分页参数
-func getPageInfo(c *gin.Context) (int64, int64) {
+// GetPageInfo 获取分页参数
+func GetPageInfo(c *gin.Context) (int64, int64) {
 	PageStr := c.Query("page")
 	sizeStr := c.Query("size")
 	var (

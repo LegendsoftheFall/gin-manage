@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"manage/controller"
+	"manage/controller/user"
 
 	"github.com/gin-gonic/gin"
 )
@@ -9,29 +9,30 @@ import (
 func defaultRoutesInit(r *gin.Engine) {
 	defaultRoutes := r.Group("/")
 	{
-		defaultRoutes.POST("/signup", controller.SignUpHandler)
-		defaultRoutes.POST("/login", controller.LoginHandler)
-		defaultRoutes.POST("/refresh", controller.RefreshHandler)
+		defaultRoutes.POST("/signup", user.SignUpHandler)
+		defaultRoutes.POST("/login", user.LoginHandler)
+		defaultRoutes.POST("/refresh", user.RefreshHandler)
 	}
 	{
-		defaultRoutes.GET("/trendingTags", controller.TrendingTagHandler)
-		defaultRoutes.GET("/tag", controller.TagInfoHandler)
+		defaultRoutes.GET("/trendingTags", user.TrendingTagHandler)
+		defaultRoutes.GET("/tag", user.TagInfoHandler)
 	}
 	{
-		defaultRoutes.GET("/user/:id", controller.UserHomeHandler)
-		defaultRoutes.GET("/user/profile", controller.ProfileHandler)
-		defaultRoutes.GET("/user/following", controller.FollowingUsersHandler)
-		defaultRoutes.GET("/user/followers", controller.FollowerUsersHandler)
+		defaultRoutes.GET("/user/:id", user.HomeHandler)
+		defaultRoutes.GET("/user/articles", user.ArticleOfUserHandler)
+		defaultRoutes.GET("/user/profile", user.ProfileHandler)
+		defaultRoutes.GET("/user/following", user.FollowingUsersHandler)
+		defaultRoutes.GET("/user/followers", user.FollowerUsersHandler)
 	}
 	{
-		defaultRoutes.GET("/article/:id", controller.ArticleHandler)
+		defaultRoutes.GET("/article/:id", user.ArticleHandler)
 	}
 	{
-		defaultRoutes.GET("/comment/list", controller.CommentListHandler)
+		defaultRoutes.GET("/comment/list", user.CommentListHandler)
 	}
 	{
-		defaultRoutes.GET("/search/article", controller.SearchArticleHandler)
-		defaultRoutes.GET("/search/tag", controller.SearchTagHandler)
-		defaultRoutes.GET("/search/user", controller.SearchUserHandler)
+		defaultRoutes.GET("/search/article", user.SearchArticleHandler)
+		defaultRoutes.GET("/search/tag", user.SearchTagHandler)
+		defaultRoutes.GET("/search/user", user.SearchUserHandler)
 	}
 }

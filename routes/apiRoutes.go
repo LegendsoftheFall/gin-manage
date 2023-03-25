@@ -2,6 +2,7 @@ package routes
 
 import (
 	"manage/controller"
+	"manage/controller/user"
 	"manage/middleware"
 	"net/http"
 
@@ -21,42 +22,42 @@ func apiRoutesInit(r *gin.Engine) {
 	apiRoutes := r.Group("/api", middleware.JWTAuthMiddleware())
 	{
 		apiRoutes.GET("/user_id", UserIDHandler)
-		apiRoutes.GET("/userInfo", controller.UserInfoHandler)
-		apiRoutes.GET("/user/profile", controller.UserProfileHandler)
-		apiRoutes.PATCH("/user/profile/update", controller.UpdateProfileHandler)
+		apiRoutes.GET("/userInfo", user.InfoOfUserHandler)
+		apiRoutes.GET("/user/profile", user.ProfileOfUserHandler)
+		apiRoutes.PATCH("/user/profile/update", user.UpdateProfileHandler)
 	}
 	{
-		apiRoutes.GET("/selectTags", controller.SelectTagsHandler)
+		apiRoutes.GET("/selectTags", user.SelectTagsHandler)
 	}
 	{
 		apiRoutes.POST("/upload", controller.UpLoadHandler)
-		apiRoutes.POST("/createArticle", controller.CreateArticleHandler)
-		apiRoutes.PATCH("/editArticle", controller.EditArticleHandler)
-		apiRoutes.DELETE("/deleteArticle/:id", controller.DeleteArticleHandler)
+		apiRoutes.POST("/createArticle", user.CreateArticleHandler)
+		apiRoutes.PATCH("/editArticle", user.EditArticleHandler)
+		apiRoutes.DELETE("/deleteArticle/:id", user.DeleteArticleHandler)
 	}
 	{
-		apiRoutes.POST("/createDraft", controller.CreateDraftHandler)
-		apiRoutes.POST("/saveDraft", controller.SaveDraftHandler)
-		apiRoutes.POST("/deleteDraft", controller.DeleteDraftHandler)
-		apiRoutes.POST("/deleteAllDraft", controller.DeleteAllDraftHandler)
-		apiRoutes.GET("/drafts", controller.DraftsHandler)
-		apiRoutes.GET("/draft/:id", controller.DraftHandler)
+		apiRoutes.POST("/createDraft", user.CreateDraftHandler)
+		apiRoutes.POST("/saveDraft", user.SaveDraftHandler)
+		apiRoutes.POST("/deleteDraft", user.DeleteDraftHandler)
+		apiRoutes.POST("/deleteAllDraft", user.DeleteAllDraftHandler)
+		apiRoutes.GET("/drafts", user.DraftsHandler)
+		apiRoutes.GET("/draft/:id", user.DraftHandler)
 	}
 	{
-		apiRoutes.POST("/like", controller.LikeHandler)
+		apiRoutes.POST("/like", user.LikeHandler)
 	}
 	{
-		apiRoutes.POST("/collect", controller.CollectHandler)
-		apiRoutes.GET("/bookmark", controller.BookMarkHandler)
+		apiRoutes.POST("/collect", user.CollectHandler)
+		apiRoutes.GET("/bookmark", user.BookMarkHandler)
 	}
 	{
-		apiRoutes.POST("tag/follow/do", controller.TagDoFollowHandler)
-		apiRoutes.POST("tag/follow/undo", controller.TagUnDoFollowHandler)
-		apiRoutes.POST("user/follow/do", controller.UserDoFollowHandler)
-		apiRoutes.POST("user/follow/undo", controller.UserUnDoFollowHandler)
+		apiRoutes.POST("tag/follow/do", user.TagDoFollowHandler)
+		apiRoutes.POST("tag/follow/undo", user.TagUnDoFollowHandler)
+		apiRoutes.POST("user/follow/do", user.UserDoFollowHandler)
+		apiRoutes.POST("user/follow/undo", user.UserUnDoFollowHandler)
 	}
 	{
-		apiRoutes.POST("/comment/create", controller.CreateCommentHandler)
-		apiRoutes.POST("/comment/delete", controller.DeleteCommentHandler)
+		apiRoutes.POST("/comment/create", user.CreateCommentHandler)
+		apiRoutes.POST("/comment/delete", user.DeleteCommentHandler)
 	}
 }

@@ -1,13 +1,14 @@
 package routes
 
 import (
+	"manage/controller/user"
+
 	"github.com/gin-gonic/gin"
-	"manage/controller"
 )
 
 func recommendRoutesInit(r *gin.Engine) {
 	recommendRoutes := r.Group("/recommend")
 	{
-		recommendRoutes.GET("/list", controller.ArticleListHandler)
+		recommendRoutes.GET("/list", user.ArticleListHandler)
 	}
 }

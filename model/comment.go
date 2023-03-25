@@ -64,3 +64,13 @@ type ApiComment struct {
 	UserInfo    *UserInfo           `json:"user_info"`
 	ReplyInfos  []*ReplyCommentInfo `json:"reply_infos"`
 }
+
+type Comment struct {
+	Status    int    `json:"status" db:"status"`
+	ItemType  int    `json:"item_type" db:"item_type"`
+	CommentID int64  `json:"comment_id" db:"comment_id"`
+	UserID    int64  `json:"user_id" db:"user_id"`
+	ItemID    int64  `json:"item_id" db:"item_id"`
+	UserName  string `json:"user_name" db:"username"`
+	Content   string `json:"comment_content" db:"comment_content"`
+}

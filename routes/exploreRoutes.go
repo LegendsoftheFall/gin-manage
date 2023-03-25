@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"manage/controller"
+	"manage/controller/user"
 
 	"github.com/gin-gonic/gin"
 )
@@ -9,9 +9,9 @@ import (
 func exploreRoutesInit(r *gin.Engine) {
 	exploreRoutes := r.Group("/explore")
 	{
-		exploreRoutes.GET("/hotTags", controller.HotTagsHandler)
-		exploreRoutes.GET("/tags", controller.TagsHandler)
-		exploreRoutes.GET("/followingTags", controller.FollowingTagsHandler)
-		exploreRoutes.GET("/followingUsers", controller.FollowingUsersHandler)
+		exploreRoutes.GET("/hotTags", user.HotTagsHandler)
+		exploreRoutes.GET("/tags", user.TagsHandler)
+		exploreRoutes.GET("/followingTags", user.FollowingTagsHandler)
+		exploreRoutes.GET("/followingUsers", user.FollowingUsersHandler)
 	}
 }

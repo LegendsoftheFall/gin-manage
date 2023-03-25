@@ -2,6 +2,16 @@ package model
 
 import "time"
 
+type Admin struct {
+	AdminID      int64  `db:"admin_id"`
+	Email        string `db:"email"`
+	AdminName    string `db:"admin_name"`
+	Password     string `db:"password"`
+	Avatar       string `db:"avatar,omitempty"`
+	AccessToken  string
+	RefreshToken string
+}
+
 type User struct {
 	UserID       int64  `db:"user_id"`
 	Email        string `db:"email"`

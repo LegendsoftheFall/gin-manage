@@ -2,9 +2,10 @@ package controller
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"reflect"
 	"strings"
+
+	"github.com/gin-gonic/gin"
 
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/locales/en"
@@ -70,7 +71,7 @@ func removeTopStruct(fields map[string]string) map[string]string {
 	return res
 }
 
-func validateError(c *gin.Context, err error) {
+func ValidateError(c *gin.Context, err error) {
 	// 获取validator.ValidationErrors类型的errors
 	errs, ok := err.(validator.ValidationErrors)
 	if !ok {

@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"manage/controller"
+	"manage/controller/user"
 
 	"github.com/gin-gonic/gin"
 )
@@ -9,6 +9,6 @@ import (
 func tagRoutesInit(r *gin.Engine) {
 	tagRoutes := r.Group("/n")
 	{
-		tagRoutes.GET("/:id", controller.TagDetailHandler)
+		tagRoutes.GET("/:id", user.TagDetailHandler)
 	}
 }
