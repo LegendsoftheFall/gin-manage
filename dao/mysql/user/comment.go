@@ -337,17 +337,20 @@ func SetReplyComment(commentID int64) (err error) {
 }
 
 func GetRootComment(itemID, page, size int64, order, endTime string) (rootComment []*model.RootComment, total int, err error) {
-	orderKey := "create_time"
-	if order == model.OrderScore {
-		orderKey = "likes"
-	}
 	// 获取根评论信息
-	sqlStr1 := `select comment_id, user_id, item_id, item_type, status,likes, comment_picture, comment_content, create_time from comments
-where item_id = ? and item_type = 2 and create_time < ? and status = 1 order by ? desc limit ?,?`
-	if err = mysql.DB.Select(&rootComment, sqlStr1, itemID, endTime, orderKey, (page-1)*size, size); err != nil {
-		return
+	if order == model.OrderScore {
+		sqlStr1 := `select comment_id, user_id, item_id, item_type, status,likes, comment_picture, comment_content, create_time from comments
+where item_id = ? and item_type = 2 and create_time < ? and status = 1 order by likes desc limit ?,?`
+		if err = mysql.DB.Select(&rootComment, sqlStr1, itemID, endTime, (page-1)*size, size); err != nil {
+			return
+		}
+	} else {
+		sqlStr1 := `select comment_id, user_id, item_id, item_type, status,likes, comment_picture, comment_content, create_time from comments
+where item_id = ? and item_type = 2 and create_time < ? and status = 1 order by create_time desc limit ?,?`
+		if err = mysql.DB.Select(&rootComment, sqlStr1, itemID, endTime, (page-1)*size, size); err != nil {
+			return
+		}
 	}
-
 	// 获取根评论总数
 	sqlStr2 := `select count(1) from comments where item_id = ? and status = 1 and item_type = 2 and create_time < ?`
 	err = mysql.DB.Get(&total, sqlStr2, itemID, endTime)

@@ -91,7 +91,7 @@ func DeleteArticleHandler(c *gin.Context) {
 		return
 	}
 	controller.ResponseSuccess(c, gin.H{
-		"id": uid,
+		"id": userID,
 	})
 }
 

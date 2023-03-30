@@ -31,12 +31,12 @@ type ReplyComment struct {
 	ItemType       int       `json:"item_type" db:"item_type"`
 	Likes          int       `json:"likes" db:"likes"`
 	Status         int       `json:"reply_status" db:"status"`
-	ReplyCommentID int64     `json:"reply_comment_id"`
-	ReplyID        int64     `json:"reply_id" db:"comment_id"`
-	ToReplyID      int64     `json:"reply_to_reply_id" db:"ancestor"`
-	UserID         int64     `json:"user_id" db:"user_id"`
-	ToUserID       int64     `json:"reply_to_user_id" db:"user_id"`
-	ItemID         int64     `json:"item_id" db:"item_id"`
+	ReplyCommentID int64     `json:"reply_comment_id,string"`
+	ReplyID        int64     `json:"reply_id,string" db:"comment_id"`
+	ToReplyID      int64     `json:"reply_to_reply_id,string" db:"ancestor"`
+	UserID         int64     `json:"user_id,string" db:"user_id"`
+	ToUserID       int64     `json:"reply_to_user_id,string" db:"user_id"`
+	ItemID         int64     `json:"item_id,string" db:"item_id"`
 	Content        string    `json:"reply_content" db:"comment_content"`
 	Picture        string    `json:"reply_picture" db:"comment_picture"`
 	Format         string    `json:"format"`
@@ -51,7 +51,7 @@ type RootCommentInfo struct {
 }
 
 type ReplyCommentInfo struct {
-	ReplyID     int64         `json:"reply_id"`
+	ReplyID     int64         `json:"reply_id,string"`
 	ReplyInfo   *ReplyComment `json:"reply_info"`
 	ParentReply *ReplyComment `json:"parent_reply"`
 	UserInfo    *UserInfo     `json:"user_info"`
@@ -59,18 +59,27 @@ type ReplyCommentInfo struct {
 }
 
 type ApiComment struct {
-	CommentID   int64               `json:"comment_id"`
+	CommentID   int64               `json:"comment_id,string"`
 	CommentInfo *RootCommentInfo    `json:"comment_info"`
 	UserInfo    *UserInfo           `json:"user_info"`
 	ReplyInfos  []*ReplyCommentInfo `json:"reply_infos"`
 }
 
 type Comment struct {
-	Status    int    `json:"status" db:"status"`
-	ItemType  int    `json:"item_type" db:"item_type"`
-	CommentID int64  `json:"comment_id" db:"comment_id"`
-	UserID    int64  `json:"user_id" db:"user_id"`
-	ItemID    int64  `json:"item_id" db:"item_id"`
-	UserName  string `json:"user_name" db:"username"`
-	Content   string `json:"comment_content" db:"comment_content"`
+	Status     int       `json:"status" db:"status"`
+	ItemType   int       `json:"item_type" db:"item_type"`
+	CommentID  int64     `json:"comment_id,string" db:"comment_id"`
+	UserID     int64     `json:"user_id,string" db:"user_id"`
+	ItemID     int64     `json:"item_id,string" db:"item_id"`
+	Type       string    `json:"type"`
+	UserName   string    `json:"user_name" db:"username"`
+	Content    string    `json:"comment_content" db:"comment_content"`
+	Format     string    `json:"format"`
+	CreateTime time.Time `json:"create_time,omitempty" db:"create_time"`
+}
+
+type ApiCommentInfo struct {
+	CommentInfo         *Comment `json:"comment_info"`
+	SuperiorCommentInfo *Comment `json:"superior_comment_info"`
+	HaveSuperior        bool     `json:"have_superior"`
 }

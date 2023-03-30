@@ -99,9 +99,9 @@ type ParamUserProfile struct {
 type ParamComment struct {
 	ItemType    int    `json:"itemType" binding:"required"`
 	UserID      int64  `json:"userID,string" binding:"required"`
-	ToCommentID int64  `json:"toCommentID"`
 	ItemID      int64  `json:"itemID,string"  binding:"required"`
 	CommentID   int64  `json:"commentID,string"`
+	ToCommentID int64  `json:"toCommentID,string"`
 	Content     string `json:"content" binding:"required"`
 	Picture     string `json:"picture"`
 }
@@ -127,7 +127,7 @@ type ParamAdminComment struct {
 	EndTime string `json:"endTime" form:"end"`
 	Page    int64  `json:"page" form:"page"`
 	Size    int64  `json:"size" form:"size"`
-	ItemID  int64  `json:"itemID" form:"item"`
+	ItemID  int64  `json:"itemID,string" form:"item"`
 }
 
 type ParamSearch struct {
@@ -148,9 +148,20 @@ type ParamDeleteArticle struct {
 	Secret string `json:"secret" binding:"required"`
 }
 
+type ParamAdminDeleteComment struct {
+	ItemType int    `json:"itemType" binding:"required"`
+	ID       int64  `json:"id,string" binding:"required"`
+	Secret   string `json:"secret" binding:"required"`
+}
+
 type ParamCreateTag struct {
 	ID           int    `json:"id,string" binding:"required"`
 	Name         string `json:"name" binding:"required"`
 	Image        string `json:"image"`
 	Introduction string `json:"introduction"`
+}
+
+type ParamSetStatus struct {
+	ID     int64 `json:"id,string" form:"id"`
+	Status int   `json:"status" form:"status"`
 }

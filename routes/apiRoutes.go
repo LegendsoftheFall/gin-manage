@@ -53,8 +53,8 @@ func apiRoutesInit(r *gin.Engine) {
 	{
 		apiRoutes.POST("tag/follow/do", user.TagDoFollowHandler)
 		apiRoutes.POST("tag/follow/undo", user.TagUnDoFollowHandler)
-		apiRoutes.POST("user/follow/do", user.UserDoFollowHandler)
-		apiRoutes.POST("user/follow/undo", user.UserUnDoFollowHandler)
+		apiRoutes.POST("user/follow/do", user.DoFollowHandler)
+		apiRoutes.POST("user/follow/undo", user.UnDoFollowHandler)
 	}
 	{
 		apiRoutes.POST("/comment/create", user.CreateCommentHandler)

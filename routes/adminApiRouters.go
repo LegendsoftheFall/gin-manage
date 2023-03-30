@@ -28,5 +28,9 @@ func adminApiRoutesInit(r *gin.Engine) {
 	}
 	{
 		adminApiRoutes.GET("/comment/all", admin.GetAllCommentHandler)
+		adminApiRoutes.GET("/comment/info/:id", admin.GetCommentInfoHandler)
+		adminApiRoutes.GET("/comment/search", admin.GetCommentByItemIDHandler)
+		adminApiRoutes.POST("/comment/set", admin.SetCommentStatusHandler)
+		adminApiRoutes.POST("/comment/delete", admin.DeleteCommentForAdminHandler)
 	}
 }

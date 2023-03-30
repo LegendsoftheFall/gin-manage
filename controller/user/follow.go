@@ -53,8 +53,8 @@ func TagUnDoFollowHandler(c *gin.Context) {
 	controller.ResponseSuccess(c, nil)
 }
 
-// UserDoFollowHandler 发起关注用户请求的处理函数
-func UserDoFollowHandler(c *gin.Context) {
+// DoFollowHandler 发起关注用户请求的处理函数
+func DoFollowHandler(c *gin.Context) {
 	p := new(model.ParamFollowUser)
 	if err := c.ShouldBindQuery(p); err != nil {
 		zap.L().Error("UserDoFollowHandler with invalid param", zap.Error(err))
@@ -75,8 +75,8 @@ func UserDoFollowHandler(c *gin.Context) {
 	controller.ResponseSuccess(c, nil)
 }
 
-// UserUnDoFollowHandler 发起取消关注用户请求的处理函数
-func UserUnDoFollowHandler(c *gin.Context) {
+// UnDoFollowHandler 发起取消关注用户请求的处理函数
+func UnDoFollowHandler(c *gin.Context) {
 	p := new(model.ParamFollowUser)
 	if err := c.ShouldBindQuery(p); err != nil {
 		zap.L().Error("UserDoFollowHandler with invalid param", zap.Error(err))

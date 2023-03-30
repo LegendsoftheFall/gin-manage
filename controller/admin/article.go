@@ -22,7 +22,7 @@ func DeleteArticleForAdminHandler(c *gin.Context) {
 		return
 	}
 	if err := user.DeleteArticle(p.ID); err != nil {
-		zap.L().Error("logic.DeleteArticleForAdminHandler(id) failed", zap.Error(err))
+		zap.L().Error("user.DeleteArticle(p.ID) failed", zap.Error(err))
 		controller.ResponseError(c, controller.CodeServerBusy)
 		return
 	}
